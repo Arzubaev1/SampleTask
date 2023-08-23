@@ -51,6 +51,7 @@ func (h *handler) Login(c *gin.Context) {
 
 	token, err := helper.GenerateJWT(map[string]interface{}{
 		"user_id": resp.Id,
+
 	}, time.Hour*360, h.cfg.SecretKey)
 	c.SetCookie("token", token, 60*60*24, "/", "localhost", false, true)
 	h.handlerResponse(c, "token", http.StatusCreated, nil)
